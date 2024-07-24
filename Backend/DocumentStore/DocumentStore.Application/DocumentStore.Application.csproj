@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="Repositories\" />
+    <ProjectReference Include="..\DocumentStore.Data\DocumentStore.Data.csproj" />
+    <ProjectReference Include="..\DocumentStore.Domain\DocumentStore.Domain.csproj" />
   </ItemGroup>
 
 </Project>

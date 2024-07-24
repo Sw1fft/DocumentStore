@@ -9,11 +9,18 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\User\" />
+    <Folder Include="DTO\User\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DocumentStore.Application\DocumentStore.Application.csproj" />
+    <ProjectReference Include="..\DocumentStore.Domain\DocumentStore.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DocumentStore.API.DTO.Document;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DocumentStore.API.Controllers.Document
 {
@@ -13,7 +14,7 @@ namespace DocumentStore.API.Controllers.Document
         }
 
         [HttpPost]
-        public async Task CreateDocument()
+        public async Task CreateDocument([FromBody] DocumentRequest document)
         {
 
         }

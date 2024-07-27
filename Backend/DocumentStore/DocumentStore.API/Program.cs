@@ -1,7 +1,9 @@
 using DocumentStore.Application.Repositories;
 using DocumentStore.Application.Services;
+using DocumentStore.Application.Mapper;
 using DocumentStore.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using DocumentStore.API.Mapper;
 using DocumentStore.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +23,9 @@ builder.Services.AddDbContext<DocumentStoreDbContext>(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAutoMapper(typeof(PofileMapper));
+builder.Services.AddAutoMapper(typeof(MapperProfile));
 
 var app = builder.Build();
 

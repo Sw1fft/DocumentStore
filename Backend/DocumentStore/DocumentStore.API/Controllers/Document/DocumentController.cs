@@ -1,6 +1,6 @@
-﻿using DocumentStore.Domain.Models.Document;
+﻿using DocumentStore.API.DTO.Document.Request;
+using DocumentStore.Domain.Models.Document;
 using DocumentStore.Domain.Interfaces;
-using DocumentStore.API.DTO.Document;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 
@@ -20,18 +20,18 @@ namespace DocumentStore.API.Controllers.Document
         }
         
         [HttpGet]
-        [Route("{userId:guid}")]
+        [Route("{userId}")]
         public async Task GetUserDocuments(Guid userId)
         {
             await _documentService.GetDocuments(userId);
         }
 
         [HttpPost]
-        public async Task CreateDocument([FromBody] DocumentRequest document)
+        public async Task CreateDocument([FromBody] DocumentRequestDTO documentRequest)
         {
-            var model = _mapper.Map<DocumentModel>(document);
+            var model = _mapper.Map<DocumentRequestDTO, DocumentModel>(documentRequest);
 
-            await _documentService.CreateDocument(Guid.NewGuid(), model);
+            await _documentService.CreateDocument(Guid.NewGuid(), model); // Генерация userId выполняется для тестов
         }
 
         [HttpPut]
@@ -41,9 +41,10 @@ namespace DocumentStore.API.Controllers.Document
         }
 
         [HttpDelete]
-        public async Task DeleteDocument()
+        [Route("{documentId}")]
+        public async Task DeleteDocument(Guid documentId)
         {
-
+            await _documentService.DeleteDocument(documentId);
         }
     }
 }

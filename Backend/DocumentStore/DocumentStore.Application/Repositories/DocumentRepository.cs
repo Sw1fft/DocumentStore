@@ -38,7 +38,6 @@ namespace DocumentStore.Application.Repositories
                     CarYear = document.Content.CarYear,
                     CarColor = document.Content.CarColor,
                     CarPrice = document.Content.CarPrice,
-                    DocumentId = document.Id,
                 },
                 UserId = userId,
             };
@@ -62,9 +61,11 @@ namespace DocumentStore.Application.Repositories
             throw new NotImplementedException();
         }
 
-        public Task DeleteDocument(Guid userId, Guid documentId)
+        public async Task DeleteDocument(Guid documentId)
         {
-            throw new NotImplementedException();
+            await _dbContext.Documents
+                .Where(d => d.Id == documentId)
+                .ExecuteDeleteAsync();
         }
     }
 }

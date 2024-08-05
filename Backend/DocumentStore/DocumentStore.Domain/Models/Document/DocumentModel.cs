@@ -2,15 +2,13 @@
 {
     public class DocumentModel
     {
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
 
-        public DateTime CreatedAt { get; private set; }
+        public DateTime CreatedAt { get; set; }
 
-        public string DocumentName { get; private set; } = null!;
+        public string DocumentName { get; set; } = null!;
 
-        public ContentModel Content { get; private set; }
-
-        public DocumentModel() { }
+        public ContentModel Content { get; set; }
 
         private DocumentModel(Guid id, DateTime createdAt, string documentName, ContentModel content)
         {
@@ -20,9 +18,9 @@
             Content = content;
         }
 
-        public static DocumentModel Create(Guid id, DateTime createdAt, string documentName, ContentModel content)
+        public static DocumentModel Create(DateTime createdAt, string documentName, ContentModel content)
         {
-            return new DocumentModel(id, createdAt, documentName, content);
+            return new DocumentModel(Guid.NewGuid(), createdAt, documentName, content);
         }
     }
 }

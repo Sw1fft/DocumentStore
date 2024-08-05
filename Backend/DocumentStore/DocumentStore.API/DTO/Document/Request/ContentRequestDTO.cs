@@ -1,6 +1,6 @@
-﻿namespace DocumentStore.API.DTO.Document
+﻿namespace DocumentStore.API.DTO.Document.Request
 {
-    public record ContentModelDTO(
+    public record ContentRequestDTO(
         string Title,
         string CarName,
         string CarModel,

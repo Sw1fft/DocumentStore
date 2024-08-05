@@ -15,11 +15,9 @@ namespace DocumentStore.Application.Services
         public async Task CreateDocument(Guid userId, DocumentModel document)
         {
             var model = DocumentModel.Create(
-                Guid.NewGuid(),
                 document.CreatedAt,
                 document.DocumentName,
                 ContentModel.Create(
-                    Guid.NewGuid(),
                     document.Content.Title,
                     document.Content.CarName,
                     document.Content.CarModel,
@@ -40,9 +38,9 @@ namespace DocumentStore.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task DeleteDocument(Guid userId, Guid documentId)
+        public async Task DeleteDocument(Guid documentId)
         {
-            throw new NotImplementedException();
+            await _repository.DeleteDocument(documentId);
         }
     }
 }

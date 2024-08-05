@@ -35,7 +35,6 @@
         }
 
         public static ContentModel Create(
-            Guid id,
             string title,
             string carName,
             string carModel,
@@ -43,7 +42,7 @@
             string carColor,
             decimal carPrice)
         {
-            return new ContentModel(id, title, carName, carModel, carYear, carColor, carPrice);
+            return new ContentModel(Guid.NewGuid(), title, carName, carModel, carYear, carColor, carPrice);
         }
     }
 }

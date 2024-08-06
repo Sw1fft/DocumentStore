@@ -42,7 +42,7 @@ namespace DocumentStore.Application.Repositories
                 UserId = userId,
             };
 
-            await _dbContext.AddAsync(entity);
+            await _dbContext.Documents.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
         }
 

@@ -7,7 +7,6 @@ using AutoMapper;
 namespace DocumentStore.API.Controllers.Document
 {
     [ApiController]
-    [Route("[controller]")]
     public class DocumentController : ControllerBase
     {
         private readonly IDocumentService _documentService;
@@ -20,29 +19,31 @@ namespace DocumentStore.API.Controllers.Document
         }
         
         [HttpGet]
-        [Route("{userId}")]
+        [Route("/{userId}/get")]
         public async Task GetUserDocuments(Guid userId)
         {
             await _documentService.GetDocuments(userId);
         }
 
         [HttpPost]
-        public async Task CreateDocument([FromBody] DocumentRequestDTO documentRequest)
+        [Route("/{userId}/create")]
+        public async Task CreateDocument([FromBody] DocumentRequestDTO documentRequest, Guid userId)
         {
             var model = _mapper.Map<DocumentRequestDTO, DocumentModel>(documentRequest);
 
-            await _documentService.CreateDocument(Guid.NewGuid(), model); // Генерация userId выполняется для тестов
+            await _documentService.CreateDocument(userId, model); // Генерация userId выполняется для тестов
         }
 
         [HttpPut]
-        public async Task UpdateDocument()
+        [Route("/{userId}/update/{documentId}")]
+        public async Task UpdateDocument(Guid userId, Guid documentId, [FromBody] DocumentRequestDTO documentRequest)
         {
 
         }
 
         [HttpDelete]
-        [Route("{documentId}")]
-        public async Task DeleteDocument(Guid documentId)
+        [Route("/{userId}/delete/{documentId}")]
+        public async Task DeleteDocument(Guid userId, Guid documentId)
         {
             await _documentService.DeleteDocument(documentId);
         }

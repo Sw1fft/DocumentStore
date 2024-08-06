@@ -28,9 +28,14 @@ namespace DocumentStore.Application.Repositories
             return _mapper.Map<UserModel>(entity);
         }
 
-        public Task<UserModel> GetUserById(Guid userId)
+        public async Task<UserModel> GetUserById(Guid userId)
         {
-            throw new NotImplementedException();
+            var entity = await _dbContext.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.Id == userId)
+                ?? throw new NullReferenceException();
+
+            return _mapper.Map<UserModel>(entity);
         }
 
         public async Task RegisterUser(UserModel user)

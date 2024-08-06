@@ -1,11 +1,13 @@
 ﻿using DocumentStore.API.DTO.Document.Request;
 using DocumentStore.Domain.Models.Document;
+using Microsoft.AspNetCore.Authorization;
 using DocumentStore.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 
 namespace DocumentStore.API.Controllers.Document
 {
+    [Authorize]
     [ApiController]
     public class DocumentController : ControllerBase
     {

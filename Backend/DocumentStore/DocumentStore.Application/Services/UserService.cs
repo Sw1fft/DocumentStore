@@ -14,11 +14,20 @@ namespace DocumentStore.Application.Services
             _userRepository = userRepository;
         }
 
-        public Task<string> LoginUser(string login, string password)
+        public async Task<string> LoginUser(string email, string password)
         {
+            UserModel user = await _userRepository.GetUserByEmail(email);
 
+            bool isValid = _passwordService.VerifyPassword(password, user.PasswordHash);
 
-            throw new NotImplementedException();
+            if (!isValid)
+            {
+                throw new Exception("Incorrect data");
+            }
+
+            string token = "";
+
+            return token;
         }
 
         public async Task RegisterUser(string email, string login, string password, string passwordConf)

@@ -10,6 +10,6 @@ namespace DocumentStore.Domain.Interfaces
 
         Task<DocumentModel> UpdateDocument(Guid userId, Guid documentId, DocumentModel document);
 
-        Task DeleteDocument(Guid documentId);
+        Task DeleteDocument(Guid userId, Guid documentId);
     }
 }

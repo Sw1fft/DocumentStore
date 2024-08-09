@@ -10,8 +10,10 @@ namespace DocumentStore.Application.Mapper
     {
         public PofileMapper()
         {
-            CreateMap<UserModel, UserEntity>().ReverseMap();
-            CreateMap<DocumentModel, DocumentEntity>().ReverseMap();
+            CreateMap<UserEntity, UserModel>()
+                .ConstructUsing(x => UserModel.Create(x.UserName, x.Email, x.PasswordHash))
+                .ReverseMap();
+            CreateMap<DocumentEntity, DocumentModel>().ReverseMap();
         }
     }
 }

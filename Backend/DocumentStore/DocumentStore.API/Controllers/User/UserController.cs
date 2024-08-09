@@ -18,7 +18,9 @@ namespace DocumentStore.API.Controllers.User
         [Route("/login")]
         public async Task<IActionResult> LoginUser([FromBody] LoginRequestDTO loginRequest)
         {
-            var token = _userService.LoginUser(loginRequest.Login, loginRequest.Password);
+            var token = await _userService.LoginUser(loginRequest.Email, loginRequest.Password);
+
+            Response.Cookies.Append("documentStore", token);
 
             return Ok(token);
         }

@@ -5,7 +5,8 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DocumentStoreDb": "User ID=postgres;Password=1234;Host=localhost;Port=5432;Database=DocumentStoreDb;"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5088"

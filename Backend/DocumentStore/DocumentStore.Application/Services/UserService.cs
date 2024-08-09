@@ -7,11 +7,13 @@ namespace DocumentStore.Application.Services
     {
         private readonly IPasswordService _passwordService;
         private readonly IUserRepository _userRepository;
+        private readonly IJwtProvider _jwtProvider;
 
-        public UserService(IPasswordService passwordService, IUserRepository userRepository)
+        public UserService(IPasswordService passwordService, IUserRepository userRepository, IJwtProvider jwtProvider)
         {
             _passwordService = passwordService;
             _userRepository = userRepository;
+            _jwtProvider = jwtProvider;
         }
 
         public async Task<string> LoginUser(string email, string password)
@@ -25,12 +27,12 @@ namespace DocumentStore.Application.Services
                 throw new Exception("Incorrect data");
             }
 
-            string token = "";
+            string token = _jwtProvider.GenerateToken(user);
 
             return token;
         }
 
-        public async Task RegisterUser(string email, string login, string password, string passwordConf)
+        public async Task RegisterUser(string email, string userName, string password, string passwordConf)
         {
             bool passwordCheck = _passwordService.RegistrationVerify(password, passwordConf);
 
@@ -41,7 +43,7 @@ namespace DocumentStore.Application.Services
 
             string passwordHashed = _passwordService.GeneratePassword(password);
 
-            UserModel user = UserModel.Create(email, login, passwordHashed);
+            UserModel user = UserModel.Create(userName, email, passwordHashed);
 
             await _userRepository.RegisterUser(user);
         }

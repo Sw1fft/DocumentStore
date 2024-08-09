@@ -38,9 +38,9 @@ namespace DocumentStore.Application.Services
             throw new NotImplementedException();
         }
 
-        public async Task DeleteDocument(Guid documentId)
+        public async Task DeleteDocument(Guid userId, Guid documentId)
         {
-            await _repository.DeleteDocument(documentId);
+            await _repository.DeleteDocument(userId, documentId);
         }
     }
 }

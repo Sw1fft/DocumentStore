@@ -61,8 +61,13 @@ namespace DocumentStore.Application.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task DeleteDocument(Guid documentId)
+        public async Task DeleteDocument(Guid userId, Guid documentId)
         {
+            var entity = await _dbContext.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.Id == userId)
+                ?? throw new NullReferenceException();
+
             await _dbContext.Documents
                 .Where(d => d.Id == documentId)
                 .ExecuteDeleteAsync();

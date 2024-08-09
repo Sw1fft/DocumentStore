@@ -33,7 +33,7 @@ namespace DocumentStore.API.Controllers.Document
         {
             var model = _mapper.Map<DocumentRequestDTO, DocumentModel>(documentRequest);
 
-            await _documentService.CreateDocument(userId, model); // Генерация userId выполняется для тестов
+            await _documentService.CreateDocument(userId, model);
         }
 
         [HttpPut]
@@ -47,7 +47,7 @@ namespace DocumentStore.API.Controllers.Document
         [Route("/{userId}/delete/{documentId}")]
         public async Task DeleteDocument(Guid userId, Guid documentId)
         {
-            await _documentService.DeleteDocument(documentId);
+            await _documentService.DeleteDocument(userId, documentId);
         }
     }
 }

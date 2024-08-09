@@ -8,7 +8,7 @@
 
         public string DocumentName { get; set; } = null!;
 
-        public ContentEntity Content { get; set; } = new ContentEntity();
+        public ContentEntity Content { get; set; } = new();
 
         public Guid UserId { get; set; }
         public UserEntity User { get; set; } = null!;

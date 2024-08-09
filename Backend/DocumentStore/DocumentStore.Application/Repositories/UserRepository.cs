@@ -44,7 +44,7 @@ namespace DocumentStore.Application.Repositories
                 .AsNoTracking()
                 .FirstOrDefaultAsync(u => u.Email == user.Email);
 
-            if (isUser != null)
+            if (isUser.Result != null)
             {
                 throw new Exception("User already exist");
             }
@@ -54,6 +54,7 @@ namespace DocumentStore.Application.Repositories
                 Id = user.Id,
                 Email = user.Email,
                 UserName = user.UserName,
+                PasswordHash = user.PasswordHash
             };
 
             await _dbContext.Users.AddAsync(entity);

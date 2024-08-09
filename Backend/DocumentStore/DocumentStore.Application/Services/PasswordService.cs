@@ -6,17 +6,22 @@ namespace DocumentStore.Application.Services
     {
         public string GeneratePassword(string password)
         {
-            throw new NotImplementedException();
+            return BCrypt.Net.BCrypt.EnhancedHashPassword(password);
         }
 
         public bool RegistrationVerify(string password, string passwordConf)
         {
-            throw new NotImplementedException();
+            if (passwordConf != password)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool VerifyPassword(string password, string hashedPassword)
         {
-            throw new NotImplementedException();
+            return BCrypt.Net.BCrypt.EnhancedVerify(password, hashedPassword);
         }
     }
 }

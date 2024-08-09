@@ -10,6 +10,8 @@ namespace DocumentStore.Data.Entities
 
         public string Email { get; set; } = null!;
 
+        public string PasswordHash { get; set; } = null!;
+
         public List<DocumentEntity> Documents { get; set; } = [];
     }
 }
